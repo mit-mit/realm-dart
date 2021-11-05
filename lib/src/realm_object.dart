@@ -18,9 +18,7 @@
 
 // ignore_for_file: native_function_body_in_non_sdk_code
 
-/**
- *  The file is intentionaly not follwoing the dart naming guidelines. The name is used from native code by convention
- */
+///  The file is intentionaly not follwoing the dart naming guidelines. The name is used from native code by convention
 
 import 'list.dart';
 import 'realm_property.dart';
@@ -55,6 +53,7 @@ class RealmException implements Exception  {
 
   RealmException(this.message);
 
+  @override
   String toString() {
     return "RealmException: $message";
   }

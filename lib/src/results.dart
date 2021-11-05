@@ -30,7 +30,7 @@ import 'realm_object.dart';
 /// `deletions` and `oldModifications` are indices into the collection before the 
 /// change happened, while `insertions` and `newModifications` are indices into 
 /// the new version of the collection.
-typedef void ResultsListenerCallback(dynamic collection, dynamic changes); 
+typedef ResultsListenerCallback = void Function(dynamic collection, dynamic changes); 
 
 /// @nodoc
 class RealmResults {
@@ -62,7 +62,7 @@ class RealmResults {
 //Iterable and can't support for..in. The Results<T>.asList method provides that
 //Could rename these so Results<T> can be proper Iterable
 class _ResultsList<T extends RealmObject> extends collection.ListBase<T> {
-  Results<T> _results;
+  final Results<T> _results;
 
   _ResultsList(this._results);
 
@@ -80,7 +80,7 @@ class _ResultsList<T extends RealmObject> extends collection.ListBase<T> {
   }
 
   @override
-  void set length(int newLength) {
+  set length(int newLength) {
     _results.length = newLength;
   }
 }
@@ -89,7 +89,7 @@ class _ResultsList<T extends RealmObject> extends collection.ListBase<T> {
 /// that will update as new objects are either added to or deleted from the Realm 
 /// that match the underlying query. 
 class Results<T extends RealmObject>  {
-  RealmResults _results;
+  final RealmResults _results;
 
   Results(this._results);
 
@@ -187,8 +187,8 @@ class Results<T extends RealmObject>  {
   }
 
   /// Not supported
-  void set length(int newLength) {
-    throw new Exception("Setting length on Results<T> is not supported");
+  set length(int newLength) {
+    throw Exception("Setting length on Results<T> is not supported");
   }
 }
 
