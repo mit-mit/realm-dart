@@ -28,6 +28,8 @@ import 'src/realm_flutter.dart' if (dart.library.cli) 'src/realm_dart.dart';
 
 export 'src/realm_flutter.dart' if (dart.library.cli) 'src/realm_dart.dart';
 
+export 'package:realm_annotations/realm_annotations.dart';
+
 var _initialized = false;
 
 /// Initializes Realm library for Flutter
