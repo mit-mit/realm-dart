@@ -1,3 +1,5 @@
+import 'package:realm_dart/realm.dart';
+
 ////////////////////////////////////////////////////////////////////////////////
 //
 // Copyright 2021 Realm Inc.
@@ -20,9 +22,6 @@
 
 ///  The file is intentionaly not follwoing the dart naming guidelines. The name is used from native code by convention
 
-import 'list.dart';
-import 'realm_property.dart';
-
 // /// The callback type to use with `RealmObject.addListener`
 // /// 
 // /// The [changes.changedProperties] is a `List` with property names that got changed since the last time the object was updated.
@@ -34,7 +33,11 @@ import 'realm_property.dart';
 /// RealmObjects are generated from Realm data model classes
 /// A data model class `_MyClass` will have a RealmObject with name `MyClass` generated 
 /// which should be used insead of directly instantiating and working with RealmObject instances
-class RealmObject {
+class RealmObject implements RealmObjectMarker {
+  final _state = <String, Object?>{};
+  static void set<T>(RealmObject self, String fieldName, T value) => self._state[fieldName] = value;
+  static T get<T>(RealmObject self, String fieldName) => self._state[fieldName] as T;
+  
   String _value = "";
   void setString(String name, String value) {
     _value = value;

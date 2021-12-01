@@ -17,11 +17,30 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 class RealmModel {
-  const RealmModel();
+  final String? prefix;
+  final String? suffix;
+  const RealmModel({this.prefix, this.suffix});
+}
+
+class MapTo {
+  final String name;
+  const MapTo(this.name);
+}
+
+class PrimaryKey {
+  const PrimaryKey();
+}
+
+class Indexed {
+  const Indexed();
+}
+
+class Ignored {
+  const Ignored();
 }
 
 enum RealmPropertyType {
-  int, 
+  int,
   bool,
   string,
   // ignore: unused_field, constant_identifier_names
@@ -48,33 +67,39 @@ enum RealmPropertyType {
 
 /// A annotation class used to define Realm data model classes and their properties
 class RealmProperty {
-  
   /// Realm will use this property as the primary key
   final bool? primaryKey;
-  
+
   /// The Realm type of this property
   final RealmPropertyType type;
 
   final bool nullable;
-  
+
   /// The default value for this property
   final String? defaultValue;
-  
+
   /// `true` if this property is optional
   final bool? optional;
-  
+
   /// An alias to another property of the same RealmObject
   final String? mapTo;
-  
-  const RealmProperty(this.type, {this.nullable = false, this.defaultValue, this.optional, this.mapTo, this.primaryKey});
+
+  const RealmProperty(this.type,
+      {this.nullable = false,
+      this.defaultValue,
+      this.optional,
+      this.mapTo,
+      this.primaryKey});
 }
 
 /// A RealmProperty in a schema. Used for runtime representation of `RealmProperty`
 class SchemaProperty extends RealmProperty {
   final String name;
-  const SchemaProperty(this.name, RealmPropertyType type, {String? defaultValue, bool? optional, String? mapTo, bool? primaryKey }) 
-    : super(type, defaultValue: defaultValue, optional: optional, mapTo: mapTo, primaryKey: primaryKey);
+  const SchemaProperty(this.name, RealmPropertyType type,
+      {String? defaultValue, bool? optional, String? mapTo, bool? primaryKey})
+      : super(type,
+            defaultValue: defaultValue,
+            optional: optional,
+            mapTo: mapTo,
+            primaryKey: primaryKey);
 }
-
-
-

@@ -1,35 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 part of 'main.dart';
 
-
 // **************************************************************************
 // RealmObjectGenerator
 // **************************************************************************
 
-// ignore_for_file: unused_element, unused_local_variable
 class Car extends _Car with RealmObject {
-  
   @override
-  String get make => super.getString("make");
+  String get make => getString("make");
   @override
-  set make(String value) => super.setString("make", value);
+  set make(String value) => setString("make", value);
 
-  @override
-  static SchemaObject get schema => SchemaObject(Car)..properties = [
-    SchemaProperty("make", RealmPropertyType.string)
-  ];
+  static const schema = SchemaObject(Car, [
+    SchemaProperty("make", RealmPropertyType.string),
+  ]);
 }
 
 class Person extends _Person with RealmObject {
-  // ignore_for_file: unused_element, unused_local_variable
+  @override
+  String get name => getString("name");
+  @override
+  set name(String value) => setString("name", value);
 
-  @override
-  String get name => super.getString("name");
-  @override
-  set name(String value) => super.setString("name", value);
-
-  @override
-  static SchemaObject get schema => SchemaObject(Person)..properties = [
-    SchemaProperty("name", RealmPropertyType.string)
-  ];
+  static const schema = SchemaObject(Person, [
+    SchemaProperty("name", RealmPropertyType.string),
+  ]);
 }
