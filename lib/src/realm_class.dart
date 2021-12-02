@@ -8,7 +8,6 @@ import 'realm_object.dart';
 export 'collection.dart';
 export "configuration.dart";
 export 'helpers.dart';
-export 'list.dart';
 export 'realm_object.dart';
 export 'results.dart';
 

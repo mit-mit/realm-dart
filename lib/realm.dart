@@ -25,7 +25,6 @@ import 'src/cli/metrics/target_os_type.dart';
 
 //dart.library.cli is available only on dart desktop
 import 'src/realm_flutter.dart' if (dart.library.cli) 'src/realm_dart.dart';
-
 export 'src/realm_flutter.dart' if (dart.library.cli) 'src/realm_dart.dart';
 
 export 'package:realm_annotations/realm_annotations.dart';
