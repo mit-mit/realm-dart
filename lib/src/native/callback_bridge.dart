@@ -64,17 +64,3 @@ class CallbackBridge {
 
   CallbackBridge._(this._callback, this._free, this._error);
 }
-
-
-// Pseudo WeakReference class. Doesn't actually work. True weak references not possible before dart 2.17
-class WeakReference<T extends Object> {
-  final Expando<T> _expando;
-
-  WeakReference(T? target) : _expando = Expando<T>() {
-    this.target = target;
-  }
-
-  T? get target => _expando[this];
-  set target(T? value) => _expando[this] = value;
-}
-
