@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <exception>
+#include <iostream>
 
 #include <realm.h>
 #include "dart_api_dl.h"
@@ -43,14 +44,17 @@ RLM_API void realm_initializeDartApiDL(void* data) {
 }
 
 void handle_finalizer(void* isolate_callback_data, void* realmPtr) {
+  std::cout << "handle_finalizer (realmPtr: " << realmPtr << ")" << std::endl;
   realm_release(realmPtr);
 }
 
 RLM_API Dart_FinalizableHandle realm_attach_finalizer(Dart_Handle handle, void* realmPtr, int size) {
+  std::cout << "realm_attach_finalizer (handle:" << handle << ", realmPtr:" << realmPtr << ")" << std::endl;
   return Dart_NewFinalizableHandle_DL(handle, realmPtr, size, handle_finalizer);
 }
 
 RLM_API void realm_delete_finalizable(Dart_FinalizableHandle finalizable_handle, Dart_Handle handle) {
+  std::cout << "realm_delete_finalizable (finalizable_handle:" << finalizable_handle << ", handle:" << handle << ")" << std::endl;
   Dart_DeleteFinalizableHandle_DL(finalizable_handle, handle);
 }
 

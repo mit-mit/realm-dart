@@ -13,6 +13,7 @@ StreamController<T> _constructRealmNotificationStreamController<T>(
   late Pointer<Void> descriptor;
   RealmNotificationTokenHandle? token;
   void start() {
+    print('+ start');
     descriptor = CallbackBridge.create(callback, free: free, error: error);
     token ??= RealmNotificationTokenHandle._(subscribe(
       descriptor,
@@ -22,15 +23,18 @@ StreamController<T> _constructRealmNotificationStreamController<T>(
       nullptr, // 1) <-- should be: CallbackBridge.free,
       CallbackBridge.error,
     ));
+    print('- start');
   }
 
   void stop() {
+    print('+ stop');
     final t = token;
     if (t != null) {
       t.releaseEarly();
       CallbackBridge.internal__free(descriptor); // compensate somewhat for 1) 
       token = null;
     }
+    print('- stop');
   }
 
   controller = StreamController<T>(

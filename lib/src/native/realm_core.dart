@@ -628,13 +628,17 @@ abstract class Handle<T extends NativeType> {
   }
 
   Pointer<T> detach() {
+    print('+ detach');
     _realmLib.realm_delete_finalizable(_finalizableHandle, this);
+    print('- detach');
     return _pointer;
   }
 
   void releaseEarly() {
+    print('+ releaseEarly');
     _realmLib.realm_release(detach().cast());
     _pointer = nullptr;
+    print('- releaseEarly');
   }
 
   @override

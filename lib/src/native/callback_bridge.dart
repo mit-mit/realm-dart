@@ -23,10 +23,12 @@ class CallbackBridge {
     final bridge = CallbackBridge._(callback, free, error);
     final descriptor = calloc<Int64>().cast<Void>();
     _bridges[descriptor] = WeakReference(bridge);
+    print('__create: $descriptor');
     return descriptor;
   }
 
   static void __callback(Pointer<Void> descriptor, Pointer<Void> changes) {
+    print('__callback $descriptor');
     final bridge = _bridges[descriptor]!;
     bridge.target?._callback(changes);
   }
@@ -37,6 +39,7 @@ class CallbackBridge {
   // remove internal prefix when possible
   // ignore: non_constant_identifier_names
   static void internal__free(Pointer<Void> descriptor) {
+    print('__free $descriptor');
     final bridge = _bridges.remove(descriptor);
     if (bridge != null) {
       // protect against double free
@@ -48,6 +51,7 @@ class CallbackBridge {
   static StaticFree get free => Pointer.fromFunction(internal__free);
 
   static void __error(Pointer<Void> descriptor, Pointer<realm_async_error> error) {
+    print('__error $descriptor');
     final bridge = _bridges[descriptor]!;
     bridge.target?._error?.call(error);
   }
