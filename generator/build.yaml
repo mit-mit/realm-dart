@@ -1,6 +1,6 @@
 builders:
-  realm_object_builder:
-    import: "package:realm_generator/realm_generator.dart"
+  realm_generator:
+    import: "package:realm_generator/builder.dart"
     builder_factories: ["generateRealmObjects"]
     build_extensions: { ".dart": [".realm_objects.g.part"] }
     auto_apply: dependents

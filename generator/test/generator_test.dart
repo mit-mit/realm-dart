@@ -1,5 +1,5 @@
 import 'package:build_test/build_test.dart';
-import 'package:realm_generator/realm_generator.dart';
+import 'package:realm_generator/builder.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -881,51 +881,6 @@ class _Bad1 {}
             '    │       ^^^^^ realm model \'\$Bad1\' already defines \'Bad1\'\n'
             '    ╵\n'
             'Duplicate realm model definitions \'_Bad1\' and \'\$Bad1\'.\n'
-            '',
-      )),
-    );
-  });
-
-  test('defining both _Bad and \$Bad in different files', () async {
-    await expectLater(
-      () async => await testBuilder(
-        generateRealmObjects(),
-        {
-          'pkg|lib/src/test1.dart': r'''
-import 'package:realm_common/realm_common.dart';
-
-part 'test1.g.dart';
-
-@RealmModel()
-class $Bad2 {}
-''',
-          'pkg|lib/src/test2.dart': r'''
-import 'package:realm_common/realm_common.dart';
-
-part 'test2.g.dart';
-
-@RealmModel()
-class _Bad2 {}
-''',
-        },
-        reader: await PackageAssetReader.currentIsolate(),
-      ),
-      throwsA(isA<RealmInvalidGenerationSourceError>().having(
-        (e) => e.format(),
-        'format()',
-        'Duplicate definition\n'
-            '\n'
-            'in: package:pkg/src/test2.dart:6:7\n'
-            '  ┌──> package:pkg/src/test2.dart\n'
-            '5 │ @RealmModel()\n'
-            '6 │ class _Bad2 {}\n'
-            '  │       ^^^^^ realm model \'\$Bad2\' already defines \'Bad2\'\n'
-            '  ╵\n'
-            '  ┌──> package:pkg/src/test1.dart\n'
-            '6 │ class \$Bad2 {}\n'
-            '  │       ━━━━━ \n'
-            '  ╵\n'
-            'Duplicate realm model definitions \'_Bad2\' and \'\$Bad2\'.\n'
             '',
       )),
     );
