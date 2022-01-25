@@ -404,7 +404,7 @@ class _RealmCore {
     });
   }
 
-  Stream<RealmObjectChanges> realmObjectChanged(RealmObject object, SchedulerHandle scheduler) {
+  Stream<RealmObjectChanges> realmObjectChanges(RealmObject object, SchedulerHandle scheduler) {
     late StreamController<RealmObjectChanges> controller;
 
     void callback(Pointer<Void> data) {
