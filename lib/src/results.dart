@@ -199,8 +199,8 @@ class RealmResults<T> extends collection.IterableBase<T> {
   //   throw new Exception("Setting length on Results<T> is not supported");
   // }
 
-  Stream<RealmResultsChanges<T>> get changed => realmCore
-      .resultsChanged(
+  Stream<RealmResultsChanges<T>> get changes => realmCore
+      .resultsChanges(
         this,
         realm.scheduler.handle,
       )
