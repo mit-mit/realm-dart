@@ -826,7 +826,7 @@ Future<void> main([List<String>? args]) async {
         }
       });
 
-      test('RealmList.changed', () async {
+      test('RealmList.changes', () async {
         var config = Configuration([Team.schema, Person.schema]);
         var realm = Realm(config);
 
@@ -838,7 +838,7 @@ Future<void> main([List<String>? args]) async {
           realm.write(() {}); // dummy write to raise notification from previous write
         }
 
-        final stream = (team.players as RealmList<Person>).changed.asBroadcastStream();
+        final stream = (team.players as RealmList<Person>).changes.asBroadcastStream();
 
         var callbacks = 0;
         final subscription = stream.listen((_) => ++callbacks);
